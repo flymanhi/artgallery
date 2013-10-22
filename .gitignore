@@ -4,3 +4,11 @@
 *.jar
 *.war
 *.ear
+
+.classpath
+.git/
+.externalToolBuilders/
+.settings/
+build/
+.gitignore
+.project

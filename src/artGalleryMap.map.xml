@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-map xmlns="http://cayenne.apache.org/schema/3.0/modelMap"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://cayenne.apache.org/schema/3.0/modelMap http://cayenne.apache.org/schema/3.0/modelMap.xsd"
+  project-version="3.0.0.1">
+	<property name="defaultPackage" value="com.artgallery"/>
+	<db-entity name="author" schema="public">
+		<db-attribute name="author_id" type="BIGINT" isPrimaryKey="true" isMandatory="true" length="19"/>
+		<db-attribute name="author_introduce" type="CLOB" length="2147483647"/>
+		<db-attribute name="member_id" type="BIGINT" length="19"/>
+	</db-entity>
+	<db-entity name="author_works" schema="public">
+		<db-attribute name="author_id" type="BIGINT" length="19"/>
+		<db-attribute name="author_works_id" type="BIGINT" isPrimaryKey="true" isMandatory="true" length="19"/>
+		<db-attribute name="work_id" type="BIGINT" length="19"/>
+	</db-entity>
+	<db-entity name="favoriates" schema="public">
+		<db-attribute name="fav_id" type="BIGINT" isPrimaryKey="true" isMandatory="true" length="19"/>
+		<db-attribute name="member_id" type="BIGINT" length="19"/>
+		<db-attribute name="work_id" type="BIGINT" length="19"/>
+	</db-entity>
+	<db-entity name="image" schema="public">
+		<db-attribute name="file_name" type="VARCHAR" length="100"/>
+		<db-attribute name="hd_src" type="VARCHAR" length="300"/>
+		<db-attribute name="image_id" type="BIGINT" isPrimaryKey="true" isMandatory="true" length="19"/>
+		<db-attribute name="src" type="VARCHAR" length="200"/>
+	</db-entity>
+	<db-entity name="member" schema="public">
+		<db-attribute name="email" type="VARCHAR" length="200"/>
+		<db-attribute name="member_id" type="BIGINT" isPrimaryKey="true" isMandatory="true" length="19"/>
+		<db-attribute name="password" type="VARCHAR" length="200"/>
+	</db-entity>
+	<db-entity name="work" schema="public">
+		<db-attribute name="author_id" type="BIGINT" length="19"/>
+		<db-attribute name="description" type="CLOB" length="2147483647"/>
+		<db-attribute name="favortate_num" type="BIGINT" length="19"/>
+		<db-attribute name="g_num" type="BIGINT" length="19"/>
+		<db-attribute name="image_id" type="BIGINT" length="19"/>
+		<db-attribute name="share_num" type="BIGINT" length="19"/>
+		<db-attribute name="title" type="VARCHAR" length="30"/>
+		<db-attribute name="type" type="VARCHAR" length="10"/>
+		<db-attribute name="work_id" type="BIGINT" isPrimaryKey="true" isMandatory="true" length="19"/>
+	</db-entity>
+	<obj-entity name="Author" className="com.artgallery.Author" dbEntityName="author">
+		<obj-attribute name="authorIntroduce" type="java.lang.String" db-attribute-path="author_introduce"/>
+	</obj-entity>
+	<obj-entity name="AuthorWorks" className="com.artgallery.AuthorWorks" dbEntityName="author_works">
+	</obj-entity>
+	<obj-entity name="Favoriates" className="com.artgallery.Favoriates" dbEntityName="favoriates">
+	</obj-entity>
+	<obj-entity name="Image" className="com.artgallery.Image" dbEntityName="image">
+		<obj-attribute name="fileName" type="java.lang.String" db-attribute-path="file_name"/>
+		<obj-attribute name="hdSrc" type="java.lang.String" db-attribute-path="hd_src"/>
+		<obj-attribute name="src" type="java.lang.String" db-attribute-path="src"/>
+	</obj-entity>
+	<obj-entity name="Member" className="com.artgallery.Member" dbEntityName="member">
+		<obj-attribute name="email" type="java.lang.String" db-attribute-path="email"/>
+		<obj-attribute name="password" type="java.lang.String" db-attribute-path="password"/>
+	</obj-entity>
+	<obj-entity name="Work" className="com.artgallery.Work" dbEntityName="work">
+		<obj-attribute name="description" type="java.lang.String" db-attribute-path="description"/>
+		<obj-attribute name="favortateNum" type="java.lang.Long" db-attribute-path="favortate_num"/>
+		<obj-attribute name="gNum" type="java.lang.Long" db-attribute-path="g_num"/>
+		<obj-attribute name="shareNum" type="java.lang.Long" db-attribute-path="share_num"/>
+		<obj-attribute name="title" type="java.lang.String" db-attribute-path="title"/>
+		<obj-attribute name="type" type="java.lang.String" db-attribute-path="type"/>
+	</obj-entity>
+	<db-relationship name="author_works" source="author" target="author_works" toMany="false">
+		<db-attribute-pair source="author_id" target="author_id"/>
+	</db-relationship>
+	<db-relationship name="member" source="author" target="member" toMany="false">
+		<db-attribute-pair source="member_id" target="member_id"/>
+	</db-relationship>
+	<db-relationship name="work" source="author" target="work" toMany="false">
+		<db-attribute-pair source="author_id" target="author_id"/>
+	</db-relationship>
+	<db-relationship name="author" source="author_works" target="author" toMany="false">
+		<db-attribute-pair source="author_id" target="author_id"/>
+	</db-relationship>
+	<db-relationship name="work" source="author_works" target="work" toMany="true">
+		<db-attribute-pair source="work_id" target="work_id"/>
+	</db-relationship>
+	<db-relationship name="member" source="favoriates" target="member" toMany="false">
+		<db-attribute-pair source="member_id" target="member_id"/>
+	</db-relationship>
+	<db-relationship name="work" source="favoriates" target="work" toMany="true">
+		<db-attribute-pair source="work_id" target="work_id"/>
+	</db-relationship>
+	<db-relationship name="work" source="image" target="work" toMany="false">
+		<db-attribute-pair source="image_id" target="image_id"/>
+	</db-relationship>
+	<db-relationship name="author" source="member" target="author" toMany="false">
+		<db-attribute-pair source="member_id" target="member_id"/>
+	</db-relationship>
+	<db-relationship name="favoriates" source="member" target="favoriates" toMany="false">
+		<db-attribute-pair source="member_id" target="member_id"/>
+	</db-relationship>
+	<db-relationship name="author" source="work" target="author" toMany="false">
+		<db-attribute-pair source="author_id" target="author_id"/>
+	</db-relationship>
+	<db-relationship name="author_works" source="work" target="author_works" toMany="false">
+		<db-attribute-pair source="work_id" target="work_id"/>
+	</db-relationship>
+	<db-relationship name="favoriates" source="work" target="favoriates" toMany="false">
+		<db-attribute-pair source="work_id" target="work_id"/>
+	</db-relationship>
+	<db-relationship name="image" source="work" target="image" toMany="false">
+		<db-attribute-pair source="image_id" target="image_id"/>
+	</db-relationship>
+	<obj-relationship name="authorWorks" source="Author" target="AuthorWorks" deleteRule="Cascade" db-relationship-path="author_works"/>
+	<obj-relationship name="member" source="Author" target="Member" db-relationship-path="member"/>
+	<obj-relationship name="work" source="Author" target="Work" db-relationship-path="work"/>
+	<obj-relationship name="author" source="AuthorWorks" target="Author" db-relationship-path="author"/>
+	<obj-relationship name="work" source="AuthorWorks" target="Work" deleteRule="Cascade" db-relationship-path="work"/>
+	<obj-relationship name="member" source="Favoriates" target="Member" db-relationship-path="member"/>
+	<obj-relationship name="work" source="Favoriates" target="Work" db-relationship-path="work"/>
+	<obj-relationship name="work" source="Image" target="Work" deleteRule="Nullify" db-relationship-path="work"/>
+	<obj-relationship name="author" source="Member" target="Author" deleteRule="Cascade" db-relationship-path="author"/>
+	<obj-relationship name="favoriates" source="Member" target="Favoriates" deleteRule="Cascade" db-relationship-path="favoriates"/>
+	<obj-relationship name="author" source="Work" target="Author" db-relationship-path="author"/>
+	<obj-relationship name="authorWorks" source="Work" target="AuthorWorks" deleteRule="Nullify" db-relationship-path="author_works"/>
+	<obj-relationship name="favoriates" source="Work" target="Favoriates" deleteRule="Nullify" db-relationship-path="favoriates"/>
+	<obj-relationship name="image" source="Work" target="Image" deleteRule="Cascade" db-relationship-path="image"/>
+</data-map>
