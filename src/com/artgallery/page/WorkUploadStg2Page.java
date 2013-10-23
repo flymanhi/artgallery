@@ -36,13 +36,14 @@ public class WorkUploadStg2Page extends BorderPage {
 	public void onInit() {
 		// TODO Auto-generated method stub
 		super.onInit();
-		this.request = getContext().getRequest();
+		this.request = (HttpServletRequest)getContext().getRequest();
 		this.response = getContext().getResponse();
 	}
 
 	@Override
 	public void onPost() {
 		
+		System.out.println("post Method Invoked!");
 		 if (!ServletFileUpload.isMultipartContent(request)) {
 	            throw new IllegalArgumentException("Request is not multipart, please 'multipart/form-data' enctype for your form.");
 	        }
@@ -51,10 +52,12 @@ public class WorkUploadStg2Page extends BorderPage {
 			
 		
 	        ServletFileUpload uploadHandler = new ServletFileUpload(new DiskFileItemFactory());
+	        System.out.println(getContext().getRequest().getClass());
 	        PrintWriter writer = response.getWriter();
 	        response.setContentType("application/json");
 	        JSONArray json = new JSONArray();
 	            List<FileItem> items = uploadHandler.parseRequest(request);
+	            System.out.println(items.size());
 	            for (FileItem item : items) {
 	                if (!item.isFormField()) {
 	                        File file = new File(request.getRealPath("/")+"imgs/", item.getName());

@@ -10,6 +10,17 @@
     <url-pattern>*.htm</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <description></description>
+    <display-name>SP</display-name>
+    <servlet-name>SP</servlet-name>
+    <servlet-class>com.test.servlet.SP</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SP</servlet-name>
+    <url-pattern>/SP</url-pattern>
+  </servlet-mapping>
+  
   <filter>
     <filter-name>CayenneFilter</filter-name>
     <filter-class>org.apache.cayenne.conf.WebApplicationContextFilter</filter-class>

@@ -19,7 +19,7 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: '/artgallery/work-upload-stg2.htm'
+        url: '../SP'
     });
 
     // Enable iframe cross-domain access via redirect option:
