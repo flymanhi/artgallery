@@ -43,6 +43,8 @@ public class WorkUploadStg2Page extends BorderPage {
 	@Override
 	public void onPost() {
 		
+		System.out.println("files="+getContext().getRequestParameter("files[]"));
+		
 		 if (!ServletFileUpload.isMultipartContent(request)) {
 	            throw new IllegalArgumentException("Request is not multipart, please 'multipart/form-data' enctype for your form.");
 	        }
