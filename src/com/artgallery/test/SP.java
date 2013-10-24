@@ -124,8 +124,8 @@ public class SP extends HttpServlet {
                         jsono.put("name", item.getName());
                         jsono.put("size", item.getSize());
                         jsono.put("url", "UploadServlet?getfile=" + item.getName());
-                        jsono.put("thumbnail_url", "UploadServlet?getthumb=" + item.getName());
-                        jsono.put("delete_url", "UploadServlet?delfile=" + item.getName());
+                        jsono.put("thumbnail_url", "../SP?getthumb=" + item.getName());
+                        jsono.put("delete_url", "../SP?delfile=" + item.getName());
                         jsono.put("delete_type", "GET");
                         json.put(jsono);
                         System.out.println(json.toString());
