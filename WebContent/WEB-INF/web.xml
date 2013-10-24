@@ -14,7 +14,7 @@
     <description></description>
     <display-name>SP</display-name>
     <servlet-name>SP</servlet-name>
-    <servlet-class>com.test.servlet.SP</servlet-class>
+    <servlet-class>com.artgallery.test.SP</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SP</servlet-name>
