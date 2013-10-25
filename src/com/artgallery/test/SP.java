@@ -9,6 +9,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.Session;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -32,7 +34,7 @@ public class SP extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        
+        System.out.println("request method invoked!");
         if (request.getParameter("getfile") != null && !request.getParameter("getfile").isEmpty()) {
             File file = new File(request.getRealPath("/")+"imgs/"+request.getParameter("getfile"));
             if (file.exists()) {
@@ -58,6 +60,7 @@ public class SP extends HttpServlet {
             File file = new File(request.getRealPath("/")+"imgs/"+ request.getParameter("delfile"));
             if (file.exists()) {
                 file.delete(); // TODO:check and report success
+                response.getWriter().write("1");
             } 
         } else if (request.getParameter("getthumb") != null && !request.getParameter("getthumb").isEmpty()) {
             File file = new File(request.getRealPath("/")+"imgs/"+request.getParameter("getthumb"));
@@ -123,7 +126,7 @@ public class SP extends HttpServlet {
                         JSONObject jsono = new JSONObject();
                         jsono.put("name", item.getName());
                         jsono.put("size", item.getSize());
-                        jsono.put("url", "UploadServlet?getfile=" + item.getName());
+                        jsono.put("url", "../SP?getfile=" + item.getName());
                         jsono.put("thumbnail_url", "../SP?getthumb=" + item.getName());
                         jsono.put("delete_url", "../SP?delfile=" + item.getName());
                         jsono.put("delete_type", "GET");

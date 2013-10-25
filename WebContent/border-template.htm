@@ -62,17 +62,17 @@
             <li><a href="../navbar-static-top/">Static top</a></li>
             <li class="active"><a href="./">Fixed top</a></li> 
           </ul>-->
-         <form class="navbar-form navbar-right">
+         <form id="loginForm" class="navbar-form navbar-right" action="$context$path?pageAction=onLogin">
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input id="email" name="email" type="text" placeholder="Email" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input id="password" name="password" type="password" placeholder="Password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-            <button type="submit" class="btn btn-success">register</button>
+            <button id="signin" type="button" class="btn btn-success">Sign in</button>
+            <button type="button" class="btn btn-success">register</button>
           </form>
-            
+           ==========$member.loginStatus 
          
         </div><!--/.nav-collapse -->
       </div>
@@ -104,5 +104,6 @@
     <script src="js/jquery/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/my.js"></script>
   </body>
 </html>
