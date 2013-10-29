@@ -10,8 +10,10 @@ var url = $("#loginForm").attr("action");
 var email = $("#email").val();
 var password = $("#password").val();
 var data = {email:email,password:password}
-function success(data){
-	alert(data);
+function success(result){
+	if(result == "true"){
+		location.reload();
+	}
 }
 $.ajax({
   url: url,

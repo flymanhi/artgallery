@@ -23,9 +23,13 @@ public class BorderPage extends Page {
 		 String email = getContext().getRequestParameter("email");
 		 String password = getContext().getRequestParameter("password");
 		 Member member = new Member();
-		 boolean checkResult = member.login(email, password);
-		 System.out.println("email="+email +" and password "+password);
-		 return new ActionResult("asfdafdasfda");
+		 member.setEmail(email);
+		 member.setPassword(password);
+		 boolean checkResult = member.login(member);
+		 if(checkResult){
+			 getContext().getSession().setAttribute("member", member);
+		 }
+		 return new ActionResult(checkResult+"");
 	 }
 
 }
